@@ -11,10 +11,12 @@ print(tabela_vendas)
 faturamento = tabela_vendas[['ID Loja','Valor Final']].groupby('ID Loja').sum()
 print(faturamento)
 print('-'*50)
+
 #produtos vendidos
 produtos_vendidos = tabela_vendas[['ID Loja','Quantidade','Valor Final']].groupby('ID Loja').sum()
 print(produtos_vendidos)
 print('-'*50)
+
 #ticket médio por produto em cada loja
 ticket_medio = (faturamento['Valor Final'] / produtos_vendidos['Quantidade']).to_frame()
 print(ticket_medio)
@@ -32,6 +34,7 @@ def enviar_email():
     tickets medios :
     {ticket_medio.to_html()}</p> 
     """
+    #informações que precisam ser preenchidas antes de lançar o email
     msg = email.message.Message()
     msg['Subject'] = "Assunto"
     msg['From'] = 'remetente'
